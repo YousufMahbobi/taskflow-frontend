@@ -5,7 +5,6 @@ import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
 
 // Components
 import Footer from '@/layouts/components/Footer.vue'
-import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
 import UserProfile from '@/layouts/components/UserProfile.vue'
 </script>
 
@@ -34,25 +33,10 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
 
           <span class="d-none d-md-flex align-center text-disabled">
             <span class="me-3">Search</span>
-            <span class="meta-key">&#8984;K</span>
           </span>
         </div>
 
         <VSpacer />
-
-        <IconBtn
-          href="https://github.com/themeselection/materio-vuetify-vuejs-admin-template-free"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <VIcon icon="ri-github-fill" />
-        </IconBtn>
-
-        <IconBtn>
-          <VIcon icon="ri-notification-line" />
-        </IconBtn>
-
-        <NavbarThemeSwitcher class="me-2" />
 
         <UserProfile />
       </div>
@@ -71,7 +55,7 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
         <!-- eslint-enable -->
 
         <h1 class="font-weight-medium leading-normal text-xl text-uppercase">
-          Materio
+          Axios
         </h1>
       </RouterLink>
 
@@ -98,15 +82,6 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
 </template>
 
 <style lang="scss" scoped>
-.meta-key {
-  border: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
-  border-radius: 6px;
-  block-size: 1.5625rem;
-  line-height: 1.3125rem;
-  padding-block: 0.125rem;
-  padding-inline: 0.25rem;
-}
-
 .app-logo {
   display: flex;
   align-items: center;
