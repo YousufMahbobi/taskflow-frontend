@@ -1,35 +1,73 @@
-# vue
+# TaskFlow Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+TaskFlow is a task management system built with a Laravel API backend and a Vue 3 Single Page Application (SPA) frontend.
 
-## Recommended IDE Setup
+This repository contains the **frontend application**, responsible for the user interface and communication with the backend API.
 
-[VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+The frontend consumes the Laravel API and provides a dashboard for managing users and tasks.
 
-## Type Support for `.vue` Imports in TS
+---
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates.
+## Backend Repository
 
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can run `Volar: Switch TS Plugin on/off` from VS Code command palette.
+The backend API is implemented with Laravel and available in the following repository:
 
-## Customize configuration
+https://github.com/YousufMahbobi/taskflow-backend
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+The backend handles:
+
+- Authentication (Laravel Sanctum)
+- Authorization (Spatie Roles & Permissions)
+- User management
+- Task management
+- Comments and collaboration
+- REST API endpoints
+
+Please refer to the backend repository for full API documentation.
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- Vue 3
+- TypeScript
+- Vuetify
+- Pinia
+- Vue Router
+- Axios
+- Vite
+
+### Backend
+
+- Laravel
+- Sanctum (session-based authentication)
+- Spatie Roles & Permissions
+- MySQL
+
+---
+
+## Features (Planned)
+
+- Authentication (login / logout)
+- Dashboard overview
+- User management
+- Task management
+- Role-based access control
+- Integration with Laravel API
+
+---
 
 ## Project Setup
 
-```sh
-npm install
+Install dependencies
+
+```bash
+npm install 
 ```
 
-### Compile and Hot-Reload for Development
+Start development server
 
-```sh
+```bash
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
