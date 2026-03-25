@@ -31,7 +31,7 @@
     "vue3-perfect-scrollbar": "^2.0.0",
     "vuetify": "3.7.5",
     "webfontloader": "^1.6.28",
-    "zod": "^4.3.6"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.43.1",
