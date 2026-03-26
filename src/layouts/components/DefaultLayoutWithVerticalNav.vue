@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import NavItems from '@/layouts/components/NavItems.vue'
-import logo from '@images/logo.svg?raw'
+import logo from '@images/logo.png'
 import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
 
 // Components
@@ -48,14 +48,15 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
         class="app-logo app-title-wrapper"
       >
         <!-- eslint-disable vue/no-v-html -->
-        <div
-          class="d-flex"
-          v-html="logo"
-        />
+        <VImg
+            :src="logo"
+            alt="logo"
+            class="d-flex w-100"
+          />
         <!-- eslint-enable -->
 
         <h1 class="font-weight-medium leading-normal text-xl text-uppercase">
-          Axios
+          Team
         </h1>
       </RouterLink>
 
