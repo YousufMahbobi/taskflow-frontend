@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useLoginForm } from '@/modules/auth/composables/useLoginForm'
+import { useAuthStore } from '@/modules/auth/store/auth.store'
+import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useTheme } from 'vuetify'
 
 import logo from '@images/logo.png'
@@ -7,11 +11,9 @@ import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
 
-const form = ref({
-  email: '',
-  password: '',
-  remember: false,
-})
+const router = useRouter()
+const authStore = useAuthStore()
+const { form, errors, validate } = useLoginForm()
 
 const vuetifyTheme = useTheme()
 
@@ -22,6 +24,31 @@ const authThemeMask = computed(() => {
 })
 
 const isPasswordVisible = ref(false)
+const serverError = ref('')
+
+// Map validation errors to Vuetify
+const fieldErrors = (field: 'email' | 'password') => {
+  return errors.value[field] ? [errors.value[field]] : []
+}
+
+// Submit handler
+const onSubmit = async () => {
+  serverError.value = ''
+
+  if (!validate()) return
+
+  try {
+    await authStore.login({
+      email: form.email,
+      password: form.password,
+    })
+
+    await router.push({ name: 'dashboard' })
+  } catch (error: any) {
+    serverError.value =
+      error?.response?.data?.message ?? 'Login failed. Please try again.'
+  }
+}
 </script>
 
 <template>
@@ -54,7 +81,17 @@ const isPasswordVisible = ref(false)
       </VCardText>
 
       <VCardText>
-        <VForm @submit.prevent="() => {}">
+        <!-- Backend error -->
+        <VAlert
+          v-if="serverError"
+          type="error"
+          variant="tonal"
+          class="mb-4"
+        >
+          {{ serverError }}
+        </VAlert>
+
+        <VForm @submit.prevent="onSubmit">
           <VRow>
             <!-- email -->
             <VCol cols="12">
@@ -62,6 +99,8 @@ const isPasswordVisible = ref(false)
                 v-model="form.email"
                 label="Email"
                 type="email"
+                aria-placeholder="email..."
+                :error-messages="fieldErrors('email')"
               />
             </VCol>
 
@@ -72,8 +111,8 @@ const isPasswordVisible = ref(false)
                 label="Password"
                 placeholder="············"
                 :type="isPasswordVisible ? 'text' : 'password'"
-                autocomplete="password"
                 :append-inner-icon="isPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
+                :error-messages="fieldErrors('password')"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
               />
             </VCol>
@@ -83,7 +122,8 @@ const isPasswordVisible = ref(false)
               <VBtn
                 block
                 type="submit"
-                to="/"
+                :loading="authStore.loading"
+                :disabled="authStore.loading"
               >
                 Login
               </VBtn>
