@@ -46,10 +46,9 @@ export const useAuthStore = defineStore('auth', {
 
       try {
         await getCsrfCookie()
-        await login(payload)
+        const response = await login(payload)
 
-        // Option 1: fetch fresh user (recommended)
-        await this.initialize()
+        this.user = response.data.data
 
       } finally {
         this.loading = false
